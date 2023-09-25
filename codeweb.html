@@ -1,0 +1,47 @@
+<meta http-equiv="refresh" content="5">
+
+<?php
+print "<h1 style='text-align:center;'>Dieu khien vuon thong minh</h1>";
+print "<br>";
+
+$temp = file_get_contents("data.txt");
+$fanSwitch;
+$fanTrigger = $_GET["fanSwitch"];
+
+if ($fanTrigger == "on" || $fanTrigger == "off"|| $fanTrigger == "auto"){
+file_put_contents("fanStatus.txt", $fanTrigger);
+}
+
+$fanStatus = file_get_contents("fanStatus.txt");
+
+if ($temp == 0){
+	$color="red";
+	}else {
+		$color="green";
+	}
+
+if ($fanStatus == "on"){
+	$fanSwitch = "off";
+} 
+if ($fanStatus == "off"){
+	$fanSwitch = "on";
+} 
+	
+print "<p style='text-align:center; font-size:50px; margin-top: 10px; margin-bottom: 10px;color:".$color.";'>".$temp."</p>";
+
+
+print "<p>".$fanStatus."</p>";
+
+
+if ($fanStatus == "on" || $fanStatus == "off"){
+
+print "<a href='cc.php?fanSwitch=".$fanSwitch."'>".$fanSwitch."</p></a>";
+print "<a href='cc.php?fanSwitch=auto'>auto</p></a>";
+}
+
+if ($fanStatus == "auto" ){
+
+print "<a href='cc.php?fanSwitch=on'>on</p></a>";
+print "<a href='cc.php?fanSwitch=off'>off</p></a>";
+}
+?>
